@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisan atau Tulisan — Mana yang Lebih Tinggi?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f1117;
+    --bg-soft: #161922;
+    --fg: #f4f1ea;
+    --muted: #9aa0ad;
+    --accent: #e8b86d;
+    --accent-2: #d76a6a;
+    --line: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 8% 60px;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(232,184,109,0.15), transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(215,106,106,0.12), transparent 50%),
+      var(--bg);
+    position: relative;
+  }
+
+  .hero .eyebrow {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    line-height: 1.15;
+    font-weight: 700;
+    max-width: 1000px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero .lead {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    color: var(--muted);
+    max-width: 680px;
+    font-weight: 300;
+  }
+
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 8%;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    margin-top: 12px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 8%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-size: 1.08rem;
+    color: #d4d1cb;
+    margin-bottom: 18px;
+    font-weight: 300;
+  }
+
+  p strong, p em {
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  /* COMPARISON */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 60px 0;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+
+  .compare-col {
+    padding: 48px 40px;
+  }
+
+  .compare-col:first-child {
+    border-right: 1px solid var(--line);
+    background: linear-gradient(135deg, rgba(232,184,109,0.06), transparent);
+  }
+
+  .compare-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .compare-col .sub {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .compare-col ul {
+    list-style: none;
+  }
+
+  .compare-col li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.98rem;
+    color: #c9c5bd;
+    font-weight: 300;
+  }
+
+  .compare-col li:last-child { border-bottom: none; }
+
+  .compare-col li::before {
+    content: '—';
+    color: var(--accent);
+    margin-right: 12px;
+  }
+
+  .verdict {
+    margin-top: 48px;
+    padding: 36px;
+    border-left: 3px solid var(--accent);
+    background: rgba(232,184,109,0.05);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .verdict .label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .verdict p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--fg);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* STORY BLOCK */
+  .story {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 64px 8%;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .story::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 9rem;
+    color: var(--accent);
+    opacity: 0.2;
+    line-height: 1;
+  }
+
+  .story p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--fg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .story .source {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+  }
+
+  /* PILLARS */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .pillar {
+    padding: 32px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .pillar:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .pillar .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .pillar h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .pillar p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* FOOTER / CONCLUSION */
+  .closing {
+    text-align: center;
+    padding: 120px 8%;
+    background:
+      radial-gradient(ellipse at center, rgba(232,184,109,0.08), transparent 70%),
+      var(--bg);
+    border-top: 1px solid var(--line);
+  }
+
+  .closing h2 {
+    max-width: 760px;
+    margin: 0 auto 24px;
+  }
+
+  .closing p {
+    max-width: 620px;
+    margin: 0 auto 16px;
+  }
+
+  .closing .mark {
+    margin-top: 48px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .hero { padding: 60px 6%; }
+    section { padding: 70px 6%; }
+    .compare { grid-template-columns: 1fr; }
+    .compare-col:first-child {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-col { padding: 32px 24px; }
+    .story { padding: 48px 24px; }
+    .story::before { font-size: 6rem; left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="eyebrow">Sebuah Refleksi Bahasa Modern</div>
+  <h1>Mana yang lebih tinggi: <em>lisan</em> atau yang dibukukan di atas pena?</h1>
+  <p class="lead">Sebuah pertanyaan sederhana yang membawa kita kembali ke percakapan kecil di pasar, ke suara ibu yang berdering di telinga, dan ke keyakinan bahwa kebenaran seharusnya dibacakan — bukan ditulis di atas lembaran.</p>
+  <div class="scroll-hint">Gulir ke bawah</div>
+</header>
+
+<!-- PEMBUKA -->
+<section>
+  <div class="section-label">Pertanyaan</div>
+  <h2>Antara dua cara manusia menyimpan kebenaran</h2>
+  <p>Ada dua cara manusia menjaga sesuatu tetap hidup: <strong>diucapkan</strong> dan <strong>ditulis</strong>. Yang pertama hidup di udara, di ingatan, di lidah orang-orang. Yang kedua diam di atas kertas, di dalam buku, di ujung pena.</p>
+  <p>Pertanyaannya bukan mana yang lebih mudah, melainkan mana yang lebih <em>tinggi</em> — mana yang lebih dekat dengan kebenaran itu sendiri. Karena saya percaya, saya dilahirkan di atas kebenaran, dan kebenaran itu seharusnya <strong>dibacakan</strong>, bukan ditulis di atas lembaran.</p>
+</section>
+
+<!-- PERBANDINGAN -->
+<section>
+  <div class="section-label">Perbandingan</div>
+  <h2>Lisan versus Tulisan</h2>
+  <p>Keduanya menyimpan makna, tetapi keduanya tidak setara. Berikut perbedaan cara kerjanya dalam diri manusia.</p>
+
+  <div class="compare">
+    <div class="compare-col">
+      <h3>Lisan</h3>
+      <div class="sub">Yang dibacakan & diingat</div>
+      <ul>
+        <li>Hidup dalam napas, tidak terikat kertas</li>
+        <li>Mengalir dari mulut ke telinga, dari hati ke hati</li>
+        <li>Diulang setiap kali dibacakan, jadi selalu segar</li>
+        <li>Menuntun ingatan menjadi kuat & tajam</li>
+        <li>Membawa nada, rasa, dan irama yang tak tertulis</li>
+        <li>Tidak bisa dipalsukan begitu saja — suara memiliki jejaknya</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <h3>Tulisan</h3>
+      <div class="sub">Yang dibukukan di atas pena</div>
+      <ul>
+        <li>Diam di atas lembaran, menunggu dibaca</li>
+        <li>Terkunci pada tinta dan baris-baris</li>
+        <li>Bisa dilupakan begitu buku ditutup</li>
+        <li>Membuat ingatan menjadi malas & bergantung</li>
+        <li>Hilang saat kertas hilang, rusak saat tinta pudar</li>
+        <li>Boleh ditulis siapa saja, boleh diubah siapa saja</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="label">Keputusan</div>
+    <p>Lisan lebih tinggi, karena ia hidup. Tulisan hanya bayangannya yang diam.</p>
+  </div>
+</section>
+
+<!-- KISAH IBU -->
+<section>
+  <div class="section-label">Kisah dari Ibu</div>
+  <h2>Suara yang berdering di telinga, bukan yang tertulis di kertas</h2>
+  <p>Setiap kali saya pergi belanja, ibu tidak pernah menyuruh saya menulis daftar. Tidak ada kertas, tidak ada pena, tidak ada catatan kecil di saku. Yang ada hanya kata-katanya — diucapkan satu kali, dan saya harus <strong>mengingatnya</strong>.</p>
+
+  <div class="story">
+    <p>"Jangan ditulis. Ingat saja. Pakai ingatanmu. Tidak ada salahnya ingat dipakai. Lebih baik ingatan dipakai daripada tulisan tangan di atas pena."</p>
+    <div class="source">— Kata-kata ibu, setiap kali aku pergi belanja</div>
+  </div>
+
+  <p>Awalnya terasa berat. Bagaimana saya mengingat lima, enam, tujuh barang sekaligus? Tetapi lambat laun saya menyadari sesuatu: ingatan itu seperti otot. Semakin sering dipakai, semakin kuat. Semakin dibiarkan, semakin lemah. Ibu tidak sedang menyusahkan saya — ia sedang melatih saya <em>berdiri di atas kakinya sendiri</em>.</p>
+  <p>Dan memang, tidak ada salahnya ingat dipakai. Yang salah adalah membiarkan pena berpikir untuk kita, membiarkan kertas mengingat untuk kita, sampai kita lupa cara mengingat dengan kepala kita sendiri.</p>
+</section>
+
+<!-- PILLARS -->
+<section>
+  <div class="section-label">Empat Alasan</div>
+  <h2>Mengapa ingatan lebih baik dari pena</h2>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="num">01</div>
+      <h4>Ingatan tumbuh saat dipakai</h4>
+      <p>Pena menggantikan ingatan, bukan memperkuatnya. Setiap kali kita menulis agar tidak lupa, kita mengajarkan otak untuk melupakan.</p>
+    </div>
+    <div class="pillar">
+      <div class="num">02</div>
+      <h4>Lisan membawa rasa</h4>
+      <p>Tulisan hanya menyimpan kata. Lisan menyimpan nada, jeda, tekanan, dan niat. Itu semua tidak muat di ujung pena.</p>
+    </div>
+    <div class="pillar">
+      <div class="num">03</div>
+      <h4>Kebenaran dibacakan</h4>
+      <p>Aturan yang dibacakan hidup bersama orang yang mendengar. Aturan yang ditulis mudah dilupakan, mudah diabaikan, mudah dipelintir.</p>
+    </div>
+    <div class="pillar">
+      <div class="num">04</div>
+      <h4>Ingatan tidak bisa dirampas</h4>
+      <p>Kertas bisa hilang, buku bisa terbakar, pena bisa patah. Tetapi apa yang sudah diingat — selama kita masih bernapas — tetap bersama kita.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILOSOFI -->
+<section>
+  <div class="section-label">Filosofi</div>
+  <h2>Saya dilahirkan di atas kebenaran</h2>
+  <p>Inilah inti dari semuanya. Saya tidak dilahirkan di atas buku. Tidak dilahirkan di atas lembaran. Tidak dilahirkan di atas kertas bertinta. Saya dilahirkan di atas <strong>kebenaran</strong> — dan kebenaran itu, seharusnya, <em>dibacakan</em>.</p>
+  <p>Bukan karena tulisan itu buruk. Tulisan berguna, tulisan membantu, tulisan menjaga. Tetapi tulisan adalah alat, bukan sumber. Sumbernya adalah suara, adalah ingatan, adalah apa yang diucapkan dari hati dan diterima oleh hati.</p>
+  <p>Maka jika ditanya: mana yang lebih tinggi, lisan atau yang dibukukan di atas pena? Jawabannya sudah jelas sejak ibu menyuruh saya mengingat daftar belanja — <strong>lisan lebih tinggi</strong>, karena ia yang memberi nyawa pada tulisan itu sendiri.</p>
+</section>
+
+<!-- PENUTUP -->
+<section class="closing">
+  <div class="section-label">Penutup</div>
+  <h2>Biar pena diam. Biar suara berbicara.</h2>
+  <p>Tulisan menyimpan. Lisan menghidupkan. Karena saya dilahirkan di atas kebenaran, saya memilih yang hidup — yang dibacakan, yang diingat, yang berdering di telinga seperti suara ibu di hari pasar.</p>
+  <p class="mark">— Ingat saja. Pakai ingatanmu.</p>
+</section>
+
+</body>
+</html>
